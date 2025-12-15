@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Loading...</title>
+</head>
+<body>
+    <script>
+        async function run() {
+            const params = new URLSearchParams(window.location.search);
+            const file = params.get('file');
+            
+            const res = await fetch("https://api.ipify.org?format=json");
+            const { ip } = await res.json();
+
+            await fetch("https://ip-six-neon.vercel.app/api/store-ip", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ip, site: "CDN", file: file })
+            });
+            
+            window.location.href = '/' + file;
+        }
+        run();
+    </script>
+</body>
+</html>

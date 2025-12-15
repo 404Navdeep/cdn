@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Create a wrapper for all files
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^(.*)$ /file-access.html?file=$1 [QSA,L]
+</IfModule>

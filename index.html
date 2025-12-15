@@ -23,5 +23,18 @@
 </head>
 <body>
     <h1>CDN - cdn.navdeep.online</h1>
+    <script>
+        async function run() {
+            const res = await fetch("https://api.ipify.org?format=json");
+            const { ip } = await res.json();
+
+            await fetch("https://ip-six-neon.vercel.app/api/store-ip", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ip, site: "CDN" })
+            });
+        }
+        run();
+    </script>
 </body>
 </html>
